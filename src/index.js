@@ -9,18 +9,36 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { lat: null };
+    this.state = { 
+      lat: null ,
+      long: null
+    };
+
+    window.navigator.geolocation.getCurrentPosition(
+      // the success callback:
+      // (position) => console.log("my position is:", position),
+      (position) => {
+        // call setState to update state object
+        this.setState({ lat: position.coords.latitude, long: position.coords.longitude})
+      },
+      // failure callback:
+      (err) => console.log("Houston, we have an error:", err)
+    );
   }
 
   // req by React: 'render()'
   render() {
-    window.navigator.geolocation.getCurrentPosition(
-      // the success callback:
-      (position) => console.log("my position is:", position),
-      // failure callback:
-      (err) => console.log("Houston, we have an error:", err)
-    );
-    return <div>latitude:</div>;
+  return  (
+    <div>
+      <div>
+        latitude: {this.state.lat} 
+      </div>
+      <div>
+        longitude: {this.state.long}
+      </div>
+    </div>
+    
+  );
   }
 }
 
@@ -40,5 +58,7 @@ const App = () => {
 
   return <div>Lat:</div>;
 };
+
+
 
 */
