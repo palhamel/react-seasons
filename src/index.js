@@ -9,9 +9,10 @@ class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { 
-      lat: null ,
-      long: null
+    this.state = {
+      lat: null,
+      long: null,
+      errorMessage: "",
     };
 
     window.navigator.geolocation.getCurrentPosition(
@@ -19,30 +20,50 @@ class App extends React.Component {
       // (position) => console.log("my position is:", position),
       (position) => {
         // call setState to update state object
-        this.setState({ lat: position.coords.latitude, long: position.coords.longitude})
+        this.setState({
+          lat: position.coords.latitude,
+          long: position.coords.longitude,
+        });
       },
       // failure callback:
-      (err) => console.log("Houston, we have an error:", err)
+      // (err) => console.log("Houston, we have an error:", err)
+      (err) => {
+        this.setState({ errorMessage: err.message });
+      }
     );
   }
-
   // req by React: 'render()'
+
   render() {
-  return  (
-    <div>
-      <div>
-        latitude: {this.state.lat} 
-      </div>
-      <div>
-        longitude: {this.state.long}
-      </div>
-    </div>
-    
-  );
+    if (this.state.errorMessage && !this.state.lat) {
+      return <div>Error: {this.state.errorMessage} </div>;
+    }
+
+    if (!this.state.errorMessage && this.state.lat) {
+      return <div>Lat: {this.state.lat} </div>;
+    }
+
+    return <div>Loading!</div>;
   }
 }
 
 ReactDOM.render(<App />, document.querySelector("#root"));
+
+/*
+  render() {
+    return (
+      <div>
+        <div>latitude: {this.state.lat}</div>
+        <div>longitude: {this.state.long}</div>
+        <div> {this.state.errorMessage} </div>
+      </div>
+    );
+  }
+}
+
+
+
+*/
 
 // refactor component
 // functional component:
