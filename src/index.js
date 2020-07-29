@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { SeasonDisplay } from './components/SeasonDisplay'
+import { Spinner } from './components/Spinner'
 
 // rcjc - Class based component:
 
@@ -47,7 +48,7 @@ class App extends React.Component {
       return <SeasonDisplay lat={this.state.lat}/>;
     }
 
-    return <div>Loading!</div>;
+    return <Spinner />;
   }
 }
 
