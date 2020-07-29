@@ -1,5 +1,7 @@
+import './SeasonDisplay.css'
 //rafc
 import React from "react";
+
 
 const seasonConfig = {
   summer: {
@@ -32,10 +34,10 @@ export const SeasonDisplay = (props) => {
   const { textMessage, iconMessage } = seasonConfig[season]
 
   return (
-    <div>
-      <i className={`${iconMessage} icon`}/>
+    <div className={`season-display ${season}`}>
+      <i className={`icon-left massive ${iconMessage} icon`}/>
       <h1>{textMessage}</h1>
-      <i className={`${iconMessage} icon`}/>
+      <i className={`icon-right massive ${iconMessage} icon`}/>
     </div>
   );
 };
