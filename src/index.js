@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import SeasonDisplay from './components/SeasonDisplay'
+import { SeasonDisplay } from './components/SeasonDisplay'
 
 // rcjc - Class based component:
 
@@ -15,7 +15,7 @@ class App extends React.Component {
       errorMessage: "",
     };
   } */
-  
+
   state = { lat: null, long: null, errorMessage: "" };
 
   componentDidMount() {
@@ -44,7 +44,7 @@ class App extends React.Component {
     }
 
     if (!this.state.errorMessage && this.state.lat) {
-      return <div>Lat: {this.state.lat} </div>;
+      return <SeasonDisplay lat={this.state.lat}/>;
     }
 
     return <div>Loading!</div>;
