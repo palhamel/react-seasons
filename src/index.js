@@ -6,34 +6,38 @@ import ReactDOM from "react-dom";
 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
-  constructor(props) {
+/*   constructor(props) {
     super(props);
-
+    // init state
     this.state = {
       lat: null,
       long: null,
       errorMessage: "",
     };
+  } */
+  
+  state = { lat: null, long: null, errorMessage: "" };
 
+  componentDidMount() {
+    console.log("1 - comp rendered to screen");
     window.navigator.geolocation.getCurrentPosition(
-      // the success callback:
       // (position) => console.log("my position is:", position),
-      (position) => {
-        // call setState to update state object
+      // call setState to update state object
+      (position) =>
         this.setState({
           lat: position.coords.latitude,
           long: position.coords.longitude,
-        });
-      },
-      // failure callback:
+        }),
       // (err) => console.log("Houston, we have an error:", err)
-      (err) => {
-        this.setState({ errorMessage: err.message });
-      }
+      (err) => this.setState({ errorMessage: err.message })
     );
   }
-  // req by React: 'render()'
 
+  componentDidUpdate() {
+    console.log("2 - comp just updated");
+  }
+
+  // req by React: 'render()'
   render() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage} </div>;
@@ -61,8 +65,6 @@ ReactDOM.render(<App />, document.querySelector("#root"));
   }
 }
 
-
-
 */
 
 // refactor component
@@ -79,7 +81,5 @@ const App = () => {
 
   return <div>Lat:</div>;
 };
-
-
 
 */
