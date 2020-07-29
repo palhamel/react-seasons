@@ -3,7 +3,9 @@ import ReactDOM from "react-dom";
 import { SeasonDisplay } from './components/SeasonDisplay'
 import { Spinner } from './components/Spinner'
 
-// rcjc - Class based component:
+// Comments for process only
+
+// rcjc = Class based component
 
 class App extends React.Component {
   // eslint-disable-next-line no-useless-constructor
@@ -16,7 +18,6 @@ class App extends React.Component {
       errorMessage: "",
     };
   } */
-
   state = { lat: null, long: null, errorMessage: "" };
 
   componentDidMount() {
@@ -29,17 +30,16 @@ class App extends React.Component {
           lat: position.coords.latitude,
           long: position.coords.longitude,
         }),
-      // (err) => console.log("Houston, we have an error:", err)
-      (err) => this.setState({ errorMessage: err.message })
+        (err) => this.setState({ errorMessage: err.message })
+        // (err) => console.log("Houston, we have an error:", err)
     );
   }
 
-  componentDidUpdate() {
+/*   componentDidUpdate() {
     console.log("2 - comp just updated");
-  }
+  } */
 
-  // req by React: 'render()'
-  render() {
+  renderContent() {
     if (this.state.errorMessage && !this.state.lat) {
       return <div>Error: {this.state.errorMessage} </div>;
     }
@@ -47,10 +47,18 @@ class App extends React.Component {
     if (!this.state.errorMessage && this.state.lat) {
       return <SeasonDisplay lat={this.state.lat}/>;
     }
-
     // return <Spinner />;
-    return <Spinner message="Please accept location request"/>;
+    return <Spinner message="Getting Geo-location - Please accept location request"/>;
   }
+
+  // req by React: 'render()'
+  render() {
+    return (
+      <div className="style-everything-inside">
+        {this.renderContent()}
+      </div>
+    )
+  } 
 }
 
 ReactDOM.render(<App />, document.querySelector("#root"));

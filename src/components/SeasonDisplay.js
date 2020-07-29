@@ -36,7 +36,7 @@ export const SeasonDisplay = (props) => {
   return (
     <div className={`season-display ${season}`}>
       <i className={`icon-left massive ${iconMessage} icon`}/>
-      <h1>{textMessage}</h1>
+      <h1> {textMessage}</h1>
       <i className={`icon-right massive ${iconMessage} icon`}/>
     </div>
   );
